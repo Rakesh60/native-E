@@ -1,6 +1,7 @@
 <!-- Connect File -->
 <?php
 include 'admin_area\includes\connect.php';
+include 'funcions\common_function.php';
 
 ?>
 
@@ -26,7 +27,7 @@ include 'admin_area\includes\connect.php';
 
 
     <!-- FONT AWSOME LINK -->
-    <script src="https://kit.fontawesome.com/ef36600fd6.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/5f91f3dc4d.js" crossorigin="anonymous"></script>
 
     <!-- Google Fonts apis -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,7 +48,7 @@ include 'admin_area\includes\connect.php';
             <!-- NAV BAR -->
             <nav class="navbar  navbar-expand-lg" id="navbar">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#" id="nlogo"><img src="" alt=""> NATIVE_ART</a>
+                    <a class="navbar-" href="#" id="nlogo"><img src="" alt=""> NATIVE_ART</a>
                     <!-- navbar-toggler  add this class in button-->
                     <button class="navbar-toggler btn btn-outline-info" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -69,12 +70,7 @@ include 'admin_area\includes\connect.php';
                                 </a>
                                 <ul class="dropdown-menu " aria-labelledby="navbarDropdown"
                                     style="background-color: #5959ff" ;>
-                                    <li><a class=" dropdown-item" href="#category">products category1</a></li>
-                                    <li><a class=" dropdown-item" href="#">products category</a></li>
-                                    <li><a class=" dropdown-item" href="#">products category</a></li>
-                                    <li><a class=" dropdown-item" href="#">products category</a></li>
-                                    <li><a class=" dropdown-item" href="#">products category</a></li>
-
+                                    <?php getdropdowncategory();?>
                                 </ul>
 
                             <li class="nav-item">
@@ -123,18 +119,9 @@ include 'admin_area\includes\connect.php';
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Category
+                            Top Category
                         </a>
-                        <ul class="dropdown-menu " aria-labelledby="navbarDropdown" style="background-color: #5959ff" ;>
-                            <li><a class=" dropdown-item" href="#category">products category1</a></li>
-                            <li><a class=" dropdown-item" href="#">products category</a></li>
-                            <li><a class=" dropdown-item" href="#">products category</a></li>
-                            <li><a class=" dropdown-item" href="#">products category</a></li>
-                            <li><a class=" dropdown-item" href="#">products category</a></li>
-
-                        </ul>
-
-
+                        <ul class="dropdown-menu " aria-labelledby="navbarDropdown" <?php getdropdowncategory();?></ul>
                     </li>
                 </div>
 
@@ -248,53 +235,22 @@ include 'admin_area\includes\connect.php';
                 <ul class="navbar-nav me-auto text-center">
                     <li class="nav-item bg-warning">
                         <a href="" class="nav-link text-danger">
-                            <h4>BRANDS</h4>
-                        </a>
-                    </li>
-
-                    <?php
-
-$select_brands = "SELECT *FROM `brands`";
-$result_brands = mysqli_query($conn, $select_brands);
-// $row_data=mysqli_fetch_assoc($result_brands);
-// echo $row_data['brand_title'];
-while ($row_data = mysqli_fetch_assoc($result_brands)) {
-    $brand_title = $row_data['brand_title'];
-    $brand_id = $row_data['brand_id'];
-    echo "<li class='nav-item bg-success'>
-    <a href='productpage.php?brand=$brand_id' class=' nav-link text-light'>
-        <h4>$brand_title</h4>
-    </a>
-</li>";
-
-}
-?>
-
-
-
-
-
-                    <li class="nav-item bg-warning">
-                        <a href="" class="nav-link text-danger">
                             <h4>Category</h4>
                         </a>
                     </li>
                     <?php
 
-$select_category = "SELECT *FROM `categories`";
-$result_category = mysqli_query($conn, $select_category);
-// $row_data=mysqli_fetch_assoc($result_category);
-// echo $row_data['category_title'];
-while ($row_data = mysqli_fetch_assoc($result_category)) {
-    $category_title = $row_data['category_title'];
-    $category_id = $row_data['category_id'];
-    echo "<li class='nav-item bg-success'>
-    <a href='productpage.php?category=$category_id' class=' nav-link text-light'>
-        <h4>$category_title</h4>
-    </a>
-</li>";
+getcategory();
+?>
 
-}
+                    <li class="nav-item bg-warning">
+                        <a href="" class="nav-link text-danger">
+                            <h4>state</h4>
+                        </a>
+                    </li>
+
+                    <?php
+getstate();
 ?>
 
                 </ul>
@@ -305,37 +261,15 @@ while ($row_data = mysqli_fetch_assoc($result_category)) {
             <div class=" col-lg-10 col-md-9 col-sm-12">
                 <!-- Products -->
                 <div class="container row">
-                <!-- Fetching products -->
-                <?php
+                    <!-- Fetching  Full products -->
+                    <?php
+getproducts();
 
-$select_query = "SELECT * FROM `products` ORDER BY rand() limit 0,4";
-$result_query = mysqli_query($conn, $select_query);
-// $row=mysqli_fetch_assoc($result_query);
-//echo $row['product_title'];
-while ($row = mysqli_fetch_assoc($result_query)) {
-    $product_id = $row['product_id'];
-    $product_title = $row['product_title'];
-    $description = $row['product_description'];
-    $product_image1 = $row['product_image1'];
-    $product_price = $row['product_price'];
-    $category_id = $row['category_id'];
-    $brand_id = $row['brand_id'];
-    echo "<div class='col-lg-3 col-md-6 col-sm-12 mb-2  '>
-    <div class='card' style='width: 18rem;'>
-        <img class='rounded' src='./admin_area/product_images/$product_image1' class='card-img-top' alt='...'>
-        <div class='card-body'>
-            <h5 class='card-title'>$product_title</h5>
-            <p class='card-text'>$description </p>
+//get unique category
+get_unique_category();
+//get unique state
+get_unique_state(); 
 
-            <a href='#' class='btn btn-primary'>Buy now</a>
-            <a href='#' class='btn btn-primary'>Add toCart <i class=''></i> </a>
-
-        </div>
-    </div>
-
-</div>";
-
-}
 ?>
 
 
@@ -353,29 +287,6 @@ while ($row = mysqli_fetch_assoc($result_query)) {
                         </div>
 
                     </div> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -550,18 +461,18 @@ while ($row = mysqli_fetch_assoc($result_query)) {
             </div>
             <div class="footer-bottom footer-border-top light py-3">
                 <div class="container text-center">
-                    <p class="m-0">© 2021 copyright <a href="#" class="text-reset">pxdraft</a></p>
+                    <p class="m-0">© 2021 copyright <a href="#" class="text-reset">nativeart.co.in</a></p>
                 </div>
             </div>
         </footer>
     </footer>
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-        crossorigin="anonymous"></script>
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-        crossorigin="anonymous"></script>
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
 
 </body>
 
