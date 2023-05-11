@@ -2,6 +2,7 @@
 <?php
 include 'admin_area\includes\connect.php';
 include 'funcions\common_function.php';
+session_start();
 
 ?>
 
@@ -11,14 +12,17 @@ include 'funcions\common_function.php';
 <html lang="en">
 
 <head>
-    <title>Title</title>
-    <link rel="shortcut icon" href="./cart.png">
+    <title>Pdoduct_Page_Native_Art</title>
+    <link rel="icon" href="./indeximages/titleicon.png">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- BOOTSTRAP CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- BOOTSTRAP ICONS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 
     <!-- My OWN CSS -->
@@ -39,12 +43,12 @@ include 'funcions\common_function.php';
 
 <body>
     <!-- HEADER -->
-    <header class="fixed-top">
+    <header class="">
         <!-- TOP NAV -->
 
         <!-- TOP NAV -->
 
-        <div class="home-section ">
+        <div class="home-section fixed-top ">
             <!-- NAV BAR -->
             <nav class="navbar  navbar-expand-lg" id="navbar">
                 <div class="container-fluid">
@@ -58,7 +62,8 @@ include 'funcions\common_function.php';
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                <a class="nav-link active" aria-current="page" href="productpage.php">Home <i
+                                        class="fa fa-house"></i> </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Products</a>
@@ -74,7 +79,8 @@ include 'funcions\common_function.php';
                                 </ul>
 
                             <li class="nav-item">
-                                <a class="nav-link " aria-current="page" href="#">Contact Us</a>
+                                <a class="nav-link " aria-current="page" href="#">Contact Us <i
+                                        class="fa-solid fa-phone"></i></a>
                             </li>
                             </li>
                             <li class="nav-item">
@@ -82,16 +88,27 @@ include 'funcions\common_function.php';
                             </li>
                         </ul>
 
-                        <form id="formbox" class="d-flex me-5">
-                            <input id="search-box" class="form-control me-2" type="search" placeholder="Search"
-                                aria-label="Search">
-                            <button class="search-butt">
+                        <form id="formbox" action="search_product.php" class="d-flex me-5" method="get">
+                            <input id="search-box" name="search_data" class="form-control me-2" type="search"
+                                placeholder="Search" aria-label="Search">
+
+                            <!-- <input type="submit" class="btn btn-danger" value="search" name="search_data_products"> -->
+                            <button name="search_data_products" type=" submit" value="search" class="search-butt">
+
                                 <i class=" fa-solid fa-magnifying-glass" id="search-icon"></i>
                             </button>
+
                         </form>
-                        <ul class="navbar-nav me-5 mb-2 mb-lg-0">
+                        <ul class=" navbar-nav me-5 mb-2 mb-lg-0">
                             <li class="nav-item"><a href="" class="nav-link"><button class="btn btn-sm
-                                        btn-light">Login <i class="fa-solid fa-user"></i></button></a></li>
+                                        btn-light"><?php
+//$profilename = $_GET['name'];
+
+$profilename = $_SESSION['profilename'];
+
+echo $profilename;
+
+?><i class=" fa-solid fa-user"></i></button></a></li>
                             <li class="nav-item"><a class="nav-link" href="">Cart <span><i
                                             class="fa-solid fa-cart-shopping"></i></span></a>
 
@@ -129,7 +146,7 @@ include 'funcions\common_function.php';
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Category
+                            Best Deals
                         </a>
                         <ul class="dropdown-menu " aria-labelledby="navbarDropdown" style="background-color: #5959ff" ;>
                             <li><a class=" dropdown-item" href="#category">products category1</a></li>
@@ -147,7 +164,7 @@ include 'funcions\common_function.php';
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Category
+                            Health care
                         </a>
                         <ul class="dropdown-menu " aria-labelledby="navbarDropdown" style="background-color: #5959ff" ;>
                             <li><a class=" dropdown-item" href="#category">products category1</a></li>
@@ -165,7 +182,8 @@ include 'funcions\common_function.php';
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Category
+                            Baby products
+
                         </a>
                         <ul class="dropdown-menu " aria-labelledby="navbarDropdown" style="background-color: #5959ff" ;>
                             <li><a class=" dropdown-item" href="#category">products category1</a></li>
@@ -183,8 +201,7 @@ include 'funcions\common_function.php';
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Category
-                        </a>
+                            Best Products </a>
                         <ul class="dropdown-menu " aria-labelledby="navbarDropdown" style="background-color: #5959ff" ;>
                             <li><a class=" dropdown-item" href="#category">products category1</a></li>
                             <li><a class=" dropdown-item" href="#">products category</a></li>
@@ -201,7 +218,7 @@ include 'funcions\common_function.php';
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Category
+                            Popular Category
                         </a>
                         <ul class="dropdown-menu " aria-labelledby="navbarDropdown" style="background-color: #5959ff" ;>
                             <li><a class=" dropdown-item" href="#category">products category1</a></li>
@@ -245,7 +262,7 @@ getcategory();
 
                     <li class="nav-item bg-warning">
                         <a href="" class="nav-link text-danger">
-                            <h4>state</h4>
+                            <h4>State</h4>
                         </a>
                     </li>
 
@@ -268,7 +285,7 @@ getproducts();
 //get unique category
 get_unique_category();
 //get unique state
-get_unique_state(); 
+get_unique_state();
 
 ?>
 
